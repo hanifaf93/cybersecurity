@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>20 Absensi Online Kehadiran Seminar Cybersecurity & Ai Transformasi - MTsN 2 Deli Serdang</title>
+<style>
+:root{
+  --bg:#07111f;
+  --bg2:#0b1f38;
+  --cyan:#54e6d0;
+  --red:#ff4d67;
+  --yellow:#ffc857;
+  --white:#f8fbff;
+  --muted:#aebbd0;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:#fff}
+body{
+  min-height:100vh;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 15% 20%,rgba(84,230,208,.14),transparent 28%),
+    radial-gradient(circle at 85% 10%,rgba(122,92,255,.16),transparent 28%),
+    linear-gradient(135deg,#06111e,#0a2038 55%,#07111f);
+}
+.grid{
+  position:fixed;inset:0;pointer-events:none;opacity:.07;
+  background-image:
+    linear-gradient(rgba(255,255,255,.12) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.12) 1px,transparent 1px);
+  background-size:34px 34px;
+}
+.top{
+  position:relative;z-index:2;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:24px 6%;
+}
+.brand{display:flex;align-items:center;gap:12px;font-weight:1000;letter-spacing:.4px}
+.logo{
+  width:46px;height:46px;border-radius:14px;
+  display:grid;place-items:center;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.14);
+  font-size:22px;
+}
+.tag{
+  font-size:11px;font-weight:900;
+  color:#9af2e2;
+  border:1px solid rgba(84,230,208,.22);
+  background:rgba(84,230,208,.06);
+  padding:8px 11px;border-radius:999px;
+}
+.stage{
+  position:relative;z-index:2;
+  width:min(1080px,92%);
+  margin:0 auto;
+  min-height:78vh;
+  display:grid;
+  place-items:center;
+}
+.intro{
+  text-align:center;
+  max-width:900px;
+}
+.hello{
+  font-size:clamp(42px,7vw,82px);
+  line-height:.98;
+  font-weight:1000;
+  letter-spacing:-3px;
+  margin:0;
+}
+.hello .accent{
+  background:linear-gradient(90deg,#67e8d3,#a9b9ff);
+  -webkit-background-clip:text;color:transparent;
+}
+.sub{
+  color:#c4cfdd;
+  font-size:18px;
+  line-height:1.7;
+  max-width:760px;
+  margin:22px auto 0;
+}
+.start{
+  margin-top:28px;
+  border:0;
+  border-radius:14px;
+  padding:15px 24px;
+  background:linear-gradient(90deg,#0f7c6a,#185f8e);
+  color:#fff;
+  font-size:15px;
+  font-weight:1000;
+  cursor:pointer;
+  box-shadow:0 18px 40px rgba(0,0,0,.25);
+}
+.start:hover{transform:translateY(-1px)}
+.note{
+  margin-top:14px;
+  color:#718096;
+  font-size:12px;
+}
+
+/* Challenge modal */
+.overlay{
+  position:fixed;inset:0;z-index:99;
+  display:none;align-items:center;justify-content:center;
+  padding:20px;
+  background:rgba(1,8,18,.88);
+  backdrop-filter:blur(14px);
+}
+.overlay.show{display:flex}
+.modal{
+  position:relative;
+  width:min(720px,94%);
+  border-radius:24px;
+  padding:26px;
+  background:linear-gradient(180deg,rgba(17,27,44,.98),rgba(8,16,30,.98));
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 35px 100px rgba(0,0,0,.55);
+  overflow:hidden;
+  transition:.18s ease;
+}
+.modal.shake{animation:shake .22s}
+@keyframes shake{
+  0%{transform:translate(0)}
+  20%{transform:translate(-8px,2px)}
+  40%{transform:translate(7px,-2px)}
+  60%{transform:translate(-5px,1px)}
+  80%{transform:translate(4px,-1px)}
+  100%{transform:translate(0)}
+}
+.scan{
+  position:absolute;inset:0;pointer-events:none;opacity:.08;
+  background:repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,.12) 0,
+    rgba(255,255,255,.12) 1px,
+    transparent 2px,
+    transparent 5px
+  );
+}
+.windowbar{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:16px;
+  margin-bottom:18px;
+  position:relative;z-index:2;
+}
+.win-left{
+  display:flex;align-items:center;gap:10px;
+  font-size:13px;font-weight:900;color:#d6dfeb
+}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--red);box-shadow:16px 0 0 var(--yellow),32px 0 0 #44d17e;margin-right:32px}
+.closex{
+  width:42px;height:42px;border-radius:12px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.06);
+  color:#fff;font-size:20px;cursor:pointer;
+  font-weight:1000;
+}
+.closex:hover{background:rgba(255,77,103,.16);border-color:rgba(255,77,103,.28)}
+.alert{
+  position:relative;z-index:2;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:18px;
+  align-items:flex-start;
+}
+.icon{
+  width:72px;height:72px;border-radius:20px;
+  display:grid;place-items:center;
+  font-size:36px;
+  background:rgba(255,77,103,.11);
+  border:1px solid rgba(255,77,103,.22);
+}
+.kicker{
+  color:#ff899a;
+  font-size:12px;
+  letter-spacing:2px;
+  font-weight:1000;
+  text-transform:uppercase;
+}
+.title{
+  font-size:clamp(30px,5vw,48px);
+  margin:6px 0 10px;
+  line-height:1.02;
+}
+.message{
+  color:#cbd5e1;
+  line-height:1.65;
+  font-size:16px;
+}
+.counter{
+  margin-top:22px;
+  display:flex;justify-content:space-between;align-items:center;
+  gap:16px;
+  color:#d8e2ee;
+  font-size:13px;
+  position:relative;z-index:2;
+}
+.counter b{font-size:18px}
+.progress{
+  margin-top:10px;
+  height:10px;
+  background:#111d2d;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:999px;
+  overflow:hidden;
+  position:relative;z-index:2;
+}
+.bar{
+  height:100%;
+  width:5%;
+  border-radius:999px;
+  background:linear-gradient(90deg,#46d7c0,#7587ff,#ff4d67);
+  transition:width .25s ease;
+}
+.tip{
+  margin-top:18px;
+  padding:14px 15px;
+  border-radius:14px;
+  background:rgba(84,230,208,.06);
+  border:1px solid rgba(84,230,208,.15);
+  color:#bff7eb;
+  font-size:13px;
+  line-height:1.55;
+  position:relative;z-index:2;
+}
+.actions{
+  display:flex;justify-content:flex-end;gap:10px;
+  margin-top:20px;
+  position:relative;z-index:2;
+}
+.fake-close{
+  border:0;border-radius:12px;
+  padding:13px 18px;
+  background:#e7edf5;
+  color:#162033;
+  font-weight:1000;
+  cursor:pointer;
+}
+.fake-close:hover{background:#fff}
+
+/* Final */
+.final{
+  position:fixed;inset:0;z-index:120;
+  display:none;place-items:center;
+  padding:24px;
+  background:
+    radial-gradient(circle at 15% 20%,rgba(53,208,174,.18),transparent 28%),
+    linear-gradient(135deg,#04111f,#092b43);
+}
+.final.show{display:grid}
+.final-card{
+  width:min(900px,94%);
+  text-align:center;
+}
+.final .big{font-size:64px}
+.final h2{
+  font-size:clamp(42px,7vw,76px);
+  margin:10px 0 14px;
+  line-height:1;
+}
+.final p{
+  color:#cbd5e1;
+  font-size:18px;
+  line-height:1.7;
+  max-width:780px;
+  margin:0 auto;
+}
+.lessons{
+  margin-top:26px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  text-align:left;
+}
+.lesson{
+  padding:18px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.06);
+}
+.lesson b{color:#99f6e4}
+.lesson p{font-size:14px;margin:8px 0 0;line-height:1.55}
+.reset{
+  margin-top:24px;
+  border:1px solid rgba(255,255,255,.16);
+  background:rgba(255,255,255,.08);
+  color:#fff;border-radius:12px;
+  padding:13px 18px;
+  font-weight:1000;cursor:pointer;
+}
+.safe{
+  margin-top:14px;color:#748197;font-size:12px
+}
+@media(max-width:700px){
+  .alert{grid-template-columns:1fr}
+  .lessons{grid-template-columns:1fr}
+}
+
+/* ===== MOBILE / ANDROID / IPHONE OPTIMIZATION ===== */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+body {
+  min-height: 100dvh;
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
+}
+button, a {
+  touch-action: manipulation;
+}
+button {
+  min-height: 48px;
+}
+.top {
+  padding-top: max(18px, env(safe-area-inset-top));
+  padding-left: max(18px, env(safe-area-inset-left));
+  padding-right: max(18px, env(safe-area-inset-right));
+}
+.stage {
+  min-height: calc(100dvh - 95px);
+  padding-bottom: max(24px, env(safe-area-inset-bottom));
+}
+.overlay,
+.final {
+  min-height: 100dvh;
+  padding-top: max(16px, env(safe-area-inset-top));
+  padding-bottom: max(16px, env(safe-area-inset-bottom));
+  padding-left: max(14px, env(safe-area-inset-left));
+  padding-right: max(14px, env(safe-area-inset-right));
+}
+.modal {
+  max-height: calc(100dvh - 28px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.closex,
+.fake-close,
+.start,
+.reset {
+  -webkit-user-select: none;
+  user-select: none;
+}
+@media (hover:none) and (pointer:coarse) {
+  .start:hover,
+  .closex:hover,
+  .fake-close:hover {
+    transform:none;
+  }
+}
+@media (max-width: 700px) {
+  .top {
+    align-items:flex-start;
+    gap:12px;
+  }
+  .brand {
+    font-size:14px;
+  }
+  .logo {
+    width:40px;
+    height:40px;
+    border-radius:12px;
+  }
+  .tag {
+    font-size:9px;
+    padding:7px 9px;
+    max-width:145px;
+    text-align:center;
+    line-height:1.3;
+  }
+  .stage {
+    width:min(94%, 680px);
+    min-height:calc(100dvh - 85px);
+    padding:18px 0 30px;
+  }
+  .hello {
+    font-size:clamp(38px, 12vw, 58px);
+    letter-spacing:-2px;
+  }
+  .sub {
+    font-size:16px;
+    line-height:1.55;
+    margin-top:18px;
+  }
+  .start {
+    width:100%;
+    max-width:360px;
+    font-size:16px;
+    padding:16px 20px;
+  }
+  .note {
+    max-width:360px;
+    margin:14px auto 0;
+    line-height:1.45;
+  }
+  .modal {
+    width:100%;
+    border-radius:20px;
+    padding:20px 18px;
+  }
+  .windowbar {
+    margin-bottom:14px;
+  }
+  .closex {
+    width:48px;
+    height:48px;
+    flex:0 0 48px;
+  }
+  .alert {
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+  .icon {
+    width:58px;
+    height:58px;
+    border-radius:16px;
+    font-size:30px;
+  }
+  .kicker {
+    font-size:10px;
+    letter-spacing:1.5px;
+  }
+  .title {
+    font-size:clamp(30px, 10vw, 44px);
+  }
+  .message {
+    font-size:15px;
+    line-height:1.55;
+  }
+  .counter {
+    margin-top:18px;
+  }
+  .tip {
+    font-size:13px;
+    line-height:1.5;
+  }
+  .actions {
+    margin-top:16px;
+  }
+  .fake-close {
+    width:100%;
+    font-size:16px;
+    padding:15px 18px;
+  }
+  .final-card {
+    width:100%;
+    max-height:calc(100dvh - 30px);
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+    padding:8px 2px;
+  }
+  .final .big {
+    font-size:52px;
+  }
+  .final h2 {
+    font-size:clamp(38px, 11vw, 58px);
+  }
+  .final p {
+    font-size:16px;
+    line-height:1.55;
+  }
+  .lessons {
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+  .reset {
+    width:100%;
+    font-size:15px;
+  }
+}
+@media (max-width: 390px) {
+  .top {
+    padding-left:14px;
+    padding-right:14px;
+  }
+  .brand {
+    max-width:180px;
+  }
+  .tag {
+    max-width:120px;
+  }
+  .hello {
+    font-size:36px;
+  }
+  .modal {
+    padding:17px 15px;
+  }
+  .win-left {
+    font-size:12px;
+  }
+}
+@media (orientation: landscape) and (max-height: 520px) {
+  .top {
+    padding-top:10px;
+    padding-bottom:8px;
+  }
+  .stage {
+    min-height:auto;
+    padding:12px 0 20px;
+  }
+  .hello {
+    font-size:42px;
+  }
+  .sub {
+    font-size:15px;
+    margin-top:12px;
+  }
+  .modal {
+    max-height:calc(100dvh - 16px);
+  }
+}
+
+</style>
+</head>
+<body>
+<div class="grid"></div>
+
+<div class="top">
+  <div class="brand"><div class="logo">🛡️</div> CYBER AWARENESS LAB</div>
+  <div class="tag">SAFE CLASSROOM DEMO</div>
+</div>
+
+<div class="stage">
+  <div class="intro">
+    <h1 class="hello">Absensi Seminar <span class="accent">MTsN 2 Deli Serdang</span><br>Silahkan Klik Tombol Dibawah </h1>
+    <p class="sub">
+      Selamat datang di <b> Seminar Cyber Challenge</b>.
+      Silahkan isi Data Diri Anda.
+    </p>
+    <button class="Klik" onclick="KlikDisini()">Klik Disini →</button>
+    <div class="note">Demo edukasi • Android, iPhone & PC friendly • Browser/tab tetap bisa ditutup • PC shortcut: Ctrl + Shift + Q</div>
+  </div>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="modal" id="modal">
+    <div class="scan"></div>
+
+    <div class="windowbar">
+      <div class="win-left"><span class="dot"></span> Security Alert</div>
+      <button class="closex" onclick="closeAttempt()" aria-label="Close">×</button>
+    </div>
+
+    <div class="alert">
+      <div class="icon" id="icon">⚠️</div>
+      <div>
+        <div class="kicker" id="kicker">Suspicious Activity Detected</div>
+        <div class="title" id="title">Nice try 😈</div>
+        <div class="message" id="message">
+          Popup belum bisa ditutup. Coba lagi.
+        </div>
+      </div>
+    </div>
+
+    <div class="counter">
+      <span>Close Attempt</span>
+      <b id="counter">01 / 20</b>
+    </div>
+
+    <div class="progress"><div class="bar" id="bar"></div></div>
+
+    <div class="tip" id="tip">
+      Cyber Tip: Jangan panik ketika muncul warning yang tidak kamu kenal.
+    </div>
+
+    <div class="actions">
+      <button class="fake-close" onclick="closeAttempt()">CLOSE</button>
+    </div>
+  </div>
+</div>
+
+<div class="final" id="final">
+  <div class="final-card">
+    <div class="big">✅</div>
+    <h2>SIMULATION COMPLETE</h2>
+    <p>
+      Selamat! Kamu berhasil melewati 20 Click Cyber Challenge.
+      Pelajarannya bukan soal seberapa cepat kamu menutup popup —
+      tapi soal kapan kamu harus <b>berhenti, cek, dan verifikasi</b>.
+    </p>
+
+    <div class="lessons">
+      <div class="lesson">
+        <b>STOP</b>
+        <p>Jangan langsung klik berulang kali hanya karena panik atau terganggu.</p>
+      </div>
+      <div class="lesson">
+        <b>CHECK</b>
+        <p>Periksa alamat website, sumber pesan, dan apa yang sebenarnya diminta.</p>
+      </div>
+      <div class="lesson">
+        <b>VERIFY</b>
+        <p>Kalau ragu, tanya guru, orang tua, atau tuk dalang sebelum lanjut.</p>
+      </div>
+    </div>
+
+    <button class="reset" onclick="resetDemo()">↻ RUN CHALLENGE AGAIN</button>
+    <div class="safe">Browser/tab tetap bisa ditutup kapan saja. Demo ini tidak mengambil data apa pun.</div>
+  </div>
+</div>
+
+<script>
+const total = 20;
+let attempt = 1;
+
+const tips = [
+  "Jangan panik ketika muncul warning yang tidak kamu kenal.",
+  "Hadiah besar dan pesan mendesak sering dipakai untuk memancing klik.",
+  "Lihat alamat website, bukan cuma logo atau desainnya.",
+  "Jangan memasukkan password pada halaman yang terasa janggal.",
+  "Kalau link datang dari chat random, verifikasi dulu sumbernya.",
+  "Website profesional belum tentu website resmi.",
+  "Jangan klik tombol yang kamu sendiri tidak yakin fungsinya.",
+  "Periksa domain sebelum login.",
+  "Jangan percaya pesan 'akun akan diblokir' tanpa verifikasi.",
+  "OTP dan password tidak boleh dibagikan ke siapa pun.",
+  "Gunakan bookmark untuk portal penting yang sering kamu akses.",
+  "Jangan sembarang download file dari sumber yang tidak dikenal.",
+  "Macro pada file Office bisa menjalankan kode.",
+  "Kalau browser terasa aneh, tutup tab dan buka ulang dari sumber resmi.",
+  "Jangan asal tekan Allow / Enable / Accept.",
+  "QR code juga bisa membawa kamu ke website palsu.",
+  "Selalu periksa nama domain setelah scan QR.",
+  "Kalau ragu, jangan lanjutkan.",
+  "Think before you click.",
+  "STOP → CHECK → VERIFY."
+];
+
+function KlikDisini(){
+  attempt = 1;
+  document.getElementById('overlay').classList.add('show');
+  render();
+}
+
+function closeAttempt(){
+  if(attempt >= total){
+    document.getElementById('overlay').classList.remove('show');
+    document.getElementById('final').classList.add('show');
+    return;
+  }
+
+  attempt++;
+  const modal = document.getElementById('modal');
+  modal.classList.remove('shake');
+  void modal.offsetWidth;
+  modal.classList.add('shake');
+  render();
+}
+
+function render(){
+  const pct = (attempt / total) * 100;
+  document.getElementById('counter').textContent = String(attempt).padStart(2,'0') + " / " + total;
+  document.getElementById('bar').style.width = pct + "%";
+  document.getElementById('tip').textContent = "Cyber Tip: " + tips[attempt - 1];
+
+  if(attempt <= 5){
+    document.getElementById('icon').textContent = "⚠️";
+    document.getElementById('kicker').textContent = "Suspicious Activity Detected";
+    document.getElementById('title').textContent = attempt === 1 ? "Can you close me?" : "Nice try 😈";
+    document.getElementById('message').textContent = "Popup belum bisa ditutup. Coba lagi.";
+  }else if(attempt <= 10){
+    document.getElementById('icon').textContent = "🚨";
+    document.getElementById('kicker').textContent = "Repeated Close Attempts";
+    document.getElementById('title').textContent = "Masih lanjut? 😅";
+    document.getElementById('message').textContent = "Perhatikan tip di bawah. Cybersecurity bukan cuma soal klik cepat.";
+  }else if(attempt <= 15){
+    document.getElementById('icon').textContent = "🧠";
+    document.getElementById('kicker').textContent = "Think Before You Click";
+    document.getElementById('title').textContent = "Jangan panik.";
+    document.getElementById('message').textContent = "Di dunia nyata, keputusan yang buru-buru sering dimanfaatkan attacker.";
+  }else if(attempt < 20){
+    document.getElementById('icon').textContent = "🔐";
+    document.getElementById('kicker').textContent = "Almost There";
+    document.getElementById('title').textContent = "Sedikit lagi...";
+    document.getElementById('message').textContent = "Ingat tiga kata: STOP. CHECK. VERIFY.";
+  }else{
+    document.getElementById('icon').textContent = "✅";
+    document.getElementById('kicker').textContent = "Final Attempt";
+    document.getElementById('title').textContent = "Last click!";
+    document.getElementById('message').textContent = "Klik CLOSE sekali lagi untuk melihat hasil challenge.";
+  }
+
+  // Gradually intensify the visual background without blocking the browser.
+  const alpha = Math.min(0.88 + attempt * 0.0025, 0.93);
+  document.getElementById('overlay').style.background = `rgba(12,5,15,${alpha})`;
+}
+
+function resetDemo(){
+  document.getElementById('final').classList.remove('show');
+  attempt = 1;
+  render();
+}
+
+// Presenter emergency release.
+document.addEventListener('keydown', e=>{
+  if(e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'q'){
+    document.getElementById('overlay').classList.remove('show');
+    document.getElementById('final').classList.add('show');
+  }
+});
+
+// Mobile-friendly behavior:
+// keep the challenge inside the page, but never trap the browser itself.
+document.addEventListener('touchstart', function(){}, {passive:true});
+
+window.addEventListener('orientationchange', function(){
+  setTimeout(function(){
+    const m = document.getElementById('modal');
+    if(m) m.scrollTop = 0;
+  }, 120);
+});
+
+function hapticTick(){
+  if(navigator.vibrate){
+    navigator.vibrate(35);
+  }
+}
+
+const originalCloseAttempt = closeAttempt;
+closeAttempt = function(){
+  hapticTick();
+  originalCloseAttempt();
+};
+
+const originalKlikDisini = KlikDisini;
+KlikDisini = function(){
+  if(navigator.vibrate) navigator.vibrate([40,40,40]);
+  originalKlikDisini();
+};
+
+</script>
+</body>
+</html>
